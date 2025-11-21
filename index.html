@@ -10,10 +10,15 @@
     
     <!-- Tailwind Config & Warning Suppression -->
     <script>
-      // Suppress the specific Tailwind CDN warning
+      // Robustly suppress Tailwind CDN warnings
       const originalWarn = console.warn;
       console.warn = (...args) => {
-        if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
+        // Check if any argument contains the specific warning string (case insensitive)
+        const isTailwindWarning = args.some(arg => 
+          typeof arg === 'string' && arg.toLowerCase().includes('cdn.tailwindcss.com')
+        );
+        
+        if (isTailwindWarning) {
           return;
         }
         originalWarn.apply(console, args);
