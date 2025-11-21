@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export enum Sender {
   User = 'user',
@@ -23,6 +23,6 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   category: 'Frontend' | 'Backend' | 'Tools';
 }
